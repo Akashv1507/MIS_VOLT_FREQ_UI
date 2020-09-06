@@ -1,37 +1,37 @@
 import requests
 import datetime as dt
-from src.typeDefs.rawFrequencyCreationResp import RawFrequencyCreationResp
+from src.typeDefs.rawVoltageCreationResp import RawVoltageCreationResp
 
 
-class RawFrequencyCreationHandler():
-    rawFrequencyCreationUrl = ''
+class RawVoltageCreationHandler():
+    rawVoltageCreationUrl = ''
 
-    def __init__(self, rawFrequencyCreationUrl):
-        self.rawFrequencyCreationUrl = rawFrequencyCreationUrl
+    def __init__(self, rawVoltageCreationUrl):
+        self.rawVoltageCreationUrl = rawVoltageCreationUrl
 
-    def createRawFrequency(self, startDate: dt.datetime, endDate: dt.datetime) ->RawFrequencyCreationResp:
-        """create raw outages using the api service
+    def createRawVoltage(self, startDate: dt.datetime, endDate: dt.datetime) ->RawVoltageCreationResp:
+        """create derived voltage using the api service
         Args:
             startDate (dt.datetime): start date
             endDate (dt.datetime): end date
         Returns:
-            RawFrequencyCreationResp: Result of the raw frequency creation operation
+            RawVoltageCreationResp: Result of the rawVoltage creation operation
         """        
-        createrawFrequencyPayload = {
+        createRawVoltagePayload = {
             "startDate": dt.datetime.strftime(startDate, '%Y-%m-%d'),
             "endDate": dt.datetime.strftime(endDate, '%Y-%m-%d')
         }
-        res = requests.post(self.rawFrequencyCreationUrl,
-                            json=createrawFrequencyPayload)
+        res = requests.post(self.rawVoltageCreationUrl,
+                            json=createRawVoltagePayload)
         # print(res)
         # print(type(res))
         # print(res.status_code)
         # print(res.get_json())
         
-        operationResult: RawFrequencyCreationResp = {
+        operationResult: RawVoltageCreationResp = {
             "isSuccess": False,
             'status': res.status_code,
-            'message': 'Unable to create raw frequency...'
+            'message': 'Unable to create rawVoltage...'
         }
 
         if res.status_code == requests.codes['ok']:

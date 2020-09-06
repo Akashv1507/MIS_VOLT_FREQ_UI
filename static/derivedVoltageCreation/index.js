@@ -1,4 +1,4 @@
-const createRawFrequency = function() {
+const createDerivedVoltage = function() {
     const startDate = document.getElementById('startDate').value;
     const endDate = document.getElementById('endDate').value;
     const respSelector = "#respDiv";
@@ -34,4 +34,4 @@ const createRawFrequency = function() {
     });
 }
 
-document.getElementById('createRawFrequencyBtn').onclick = createRawFrequency
+document.getElementById('createDerivedVoltageBtn').onclick = createDerivedVoltage

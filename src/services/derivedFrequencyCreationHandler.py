@@ -1,37 +1,37 @@
 import requests
 import datetime as dt
-from src.typeDefs.rawFrequencyCreationResp import RawFrequencyCreationResp
+from src.typeDefs.derivedFrequencyCreationResp import DerivedFrequencyCreationResp
 
 
-class RawFrequencyCreationHandler():
-    rawFrequencyCreationUrl = ''
+class DerivedFrequencyCreationHandler():
+    derivedFrequencyCreationUrl = ''
 
-    def __init__(self, rawFrequencyCreationUrl):
-        self.rawFrequencyCreationUrl = rawFrequencyCreationUrl
+    def __init__(self, derivedFrequencyCreationUrl):
+        self.derivedFrequencyCreationUrl = derivedFrequencyCreationUrl
 
-    def createRawFrequency(self, startDate: dt.datetime, endDate: dt.datetime) ->RawFrequencyCreationResp:
-        """create raw outages using the api service
+    def createDerivedFrequency(self, startDate: dt.datetime, endDate: dt.datetime) ->DerivedFrequencyCreationResp:
+        """create derived Frequency using the api service
         Args:
             startDate (dt.datetime): start date
             endDate (dt.datetime): end date
         Returns:
-            RawFrequencyCreationResp: Result of the raw frequency creation operation
+            DerivedFrequencyCreationResp: Result of the derivedFrequency creation operation
         """        
-        createrawFrequencyPayload = {
+        createDerivedFrequencyPayload = {
             "startDate": dt.datetime.strftime(startDate, '%Y-%m-%d'),
             "endDate": dt.datetime.strftime(endDate, '%Y-%m-%d')
         }
-        res = requests.post(self.rawFrequencyCreationUrl,
-                            json=createrawFrequencyPayload)
+        res = requests.post(self.derivedFrequencyCreationUrl,
+                            json=createDerivedFrequencyPayload)
         # print(res)
         # print(type(res))
         # print(res.status_code)
         # print(res.get_json())
         
-        operationResult: RawFrequencyCreationResp = {
+        operationResult: DerivedFrequencyCreationResp = {
             "isSuccess": False,
             'status': res.status_code,
-            'message': 'Unable to create raw frequency...'
+            'message': 'Unable to create derivedFrequency...'
         }
 
         if res.status_code == requests.codes['ok']:

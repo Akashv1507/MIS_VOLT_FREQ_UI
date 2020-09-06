@@ -1,37 +1,37 @@
 import requests
 import datetime as dt
-from src.typeDefs.rawFrequencyCreationResp import RawFrequencyCreationResp
+from src.typeDefs.derivedVoltageCreationResp import DerivedVoltageCreationResp
 
 
-class RawFrequencyCreationHandler():
-    rawFrequencyCreationUrl = ''
+class DerivedVoltageCreationHandler():
+    derivedVoltageCreationUrl = ''
 
-    def __init__(self, rawFrequencyCreationUrl):
-        self.rawFrequencyCreationUrl = rawFrequencyCreationUrl
+    def __init__(self, derivedVoltageCreationUrl):
+        self.derivedVoltageCreationUrl = derivedVoltageCreationUrl
 
-    def createRawFrequency(self, startDate: dt.datetime, endDate: dt.datetime) ->RawFrequencyCreationResp:
-        """create raw outages using the api service
+    def createDerivedVoltage(self, startDate: dt.datetime, endDate: dt.datetime) ->DerivedVoltageCreationResp:
+        """create derived voltage using the api service
         Args:
             startDate (dt.datetime): start date
             endDate (dt.datetime): end date
         Returns:
-            RawFrequencyCreationResp: Result of the raw frequency creation operation
+            DerivedVoltageCreationResp: Result of the derivedVoltage creation operation
         """        
-        createrawFrequencyPayload = {
+        createDerivedVoltagePayload = {
             "startDate": dt.datetime.strftime(startDate, '%Y-%m-%d'),
             "endDate": dt.datetime.strftime(endDate, '%Y-%m-%d')
         }
-        res = requests.post(self.rawFrequencyCreationUrl,
-                            json=createrawFrequencyPayload)
+        res = requests.post(self.derivedVoltageCreationUrl,
+                            json=createDerivedVoltagePayload)
         # print(res)
         # print(type(res))
         # print(res.status_code)
         # print(res.get_json())
         
-        operationResult: RawFrequencyCreationResp = {
+        operationResult: DerivedVoltageCreationResp = {
             "isSuccess": False,
             'status': res.status_code,
-            'message': 'Unable to create raw frequency...'
+            'message': 'Unable to create derivedVoltage...'
         }
 
         if res.status_code == requests.codes['ok']:
