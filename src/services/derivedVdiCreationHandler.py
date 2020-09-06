@@ -9,7 +9,7 @@ class DerivedVdiCreationHandler():
     def __init__(self, derivedVdiCreationUrl):
         self.derivedVdiCreationUrl = derivedVdiCreationUrl
 
-    def createDerivedVdi(self, startDate: dt.datetime, endDate: dt.datetime) ->derivedVdiCreationResp:
+    def createDerivedVdi(self, startDate: dt.datetime, endDate: dt.datetime) ->DerivedVdiCreationResp:
         """create derived Vdi using the api service
         Args:
             startDate (dt.datetime): start date
@@ -28,7 +28,7 @@ class DerivedVdiCreationHandler():
         # print(res.status_code)
         # print(res.get_json())
         
-        operationResult: derivedVdiCreationResp = {
+        operationResult: DerivedVdiCreationResp = {
             "isSuccess": False,
             'status': res.status_code,
             'message': 'Unable to create derivedVdi...'

@@ -1,0 +1,26 @@
+{% extends "layoutBase.html.j2" %}
+{% block title %}Create Raw Voltage{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1>Create Raw Voltage in Raw data store</h1>
+<div class="row align-content-center">
+    <input id="startDate" class="form-inline bg-light border-1 mr-2" type="date" />
+    <input id="endDate" class="form-inline bg-light border-1 mr-3" type="date" />
+    <button id="createRawVoltageBtn" class="btn btn-success btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-sync"></i>
+        </span>
+        <span class="text">Create Data</span>
+    </button>
+</div>
+<div id='respDiv' class="row align-content-center mt-3"></div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='rawVoltageCreation/index.js') }}"></script>
+{% endblock %}

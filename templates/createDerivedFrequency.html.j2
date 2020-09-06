@@ -1,0 +1,26 @@
+{% extends "layoutBase.html.j2" %}
+{% block title %}Create Derived Frequency{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<h1>Create Derived Frequency in Derived data store</h1>
+<div class="row align-content-center">
+    <input id="startDate" class="form-inline bg-light border-1 mr-2" type="date" />
+    <input id="endDate" class="form-inline bg-light border-1 mr-3" type="date" />
+    <button id="createDerivedFrequencyBtn" class="btn btn-success btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-sync"></i>
+        </span>
+        <span class="text">Create Data</span>
+    </button>
+</div>
+<div id='respDiv' class="row align-content-center mt-3"></div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='derivedFrequencyCreation/index.js') }}"></script>
+{% endblock %}
