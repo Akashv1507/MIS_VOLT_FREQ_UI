@@ -1,0 +1,18 @@
+{% extends "layoutBase.html.j2" %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+{% if resp.isSuccess %}
+<div class="alert alert-success">
+  <strong>Success!</strong> Raw voltage creation successfull between the dates {{startDate}} and {{endDate}}
+</div>
+{% else %}
+<div class="alert alert-danger ">
+  <strong>Something went wrong</strong> Raw voltage creation unsuccessfull
+</div>
+{% endif %}
+{% endblock %}
+

@@ -51,18 +51,26 @@ def createDerivedFrequency():
     return render_template('createDerivedFrequency.html.j2')
 
 @app.route('/createRawVoltage', methods=['GET', 'POST'])
-def createRawVoltage():
+def createRawVoltageForm():
     # in case of post request, create raw voltage and return json response
     if request.method == 'POST':
-        reqData = request.get_json()
+        # reqData = request.get_json()
         # print(reqData)
+        startDate= request.form.get('startDate')
+        endDate= request.form.get('endDate')
         obj_rawVoltageCreator = RawVoltageCreationHandler(configDict['rawVoltageCreationServiceUrl'])
-        startDate = dt.datetime.strptime(reqData['startDate'], '%Y-%m-%d')
-        endDate = dt.datetime.strptime(reqData['endDate'], '%Y-%m-%d')
+        startDate = dt.datetime.strptime(startDate, '%Y-%m-%d')
+        endDate = dt.datetime.strptime(endDate, '%Y-%m-%d')
         resp = obj_rawVoltageCreator.createRawVoltage(startDate, endDate)
-        return jsonify(resp), resp['status']
+        print(resp)
+        return render_template('rawVoltageResp.html.j2',resp=resp, startDate=startDate.date(), endDate=endDate.date())
+        # return jsonify(resp), resp['status']
     # in case of get request just return the html template
     return render_template('createRawVoltage.html.j2')
+
+# @app.route('/createRawVoltage', methods=['Post'])
+# def createRawVoltagePost():
+
     
 @app.route('/createDerivedVoltage', methods=['GET', 'POST'])
 def createDerivedVoltage():
