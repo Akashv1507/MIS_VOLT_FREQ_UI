@@ -7,7 +7,6 @@ from src.services.derivedVoltageCreationHandler import DerivedVoltageCreationHan
 from src.services.derivedVdiCreationHandler import DerivedVdiCreationHandler
 
 import datetime as dt
-# from waitress import serve
 
 app = Flask(__name__)
 
@@ -15,7 +14,7 @@ app = Flask(__name__)
 configDict = getAppConfigDict()
 
 # Set the secret key to some random bytes
-# app.secret_key = appConfig['flaskSecret']
+# app.secret_key = configDict['flaskSecret']
 
 @app.route('/')
 def hello():
@@ -68,8 +67,6 @@ def createRawVoltageForm():
     # in case of get request just return the html template
     return render_template('createRawVoltage.html.j2')
 
-# @app.route('/createRawVoltage', methods=['Post'])
-# def createRawVoltagePost():
 
     
 @app.route('/createDerivedVoltage', methods=['GET', 'POST'])
