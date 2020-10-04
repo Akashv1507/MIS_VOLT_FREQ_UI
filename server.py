@@ -5,6 +5,7 @@ from src.services.derivedFrequencyCreationHandler import DerivedFrequencyCreatio
 from src.services.rawVoltageCreationHandler import RawVoltageCreationHandler
 from src.services.derivedVoltageCreationHandler import DerivedVoltageCreationHandler
 from src.services.derivedVdiCreationHandler import DerivedVdiCreationHandler
+from src.services.displayDerFreqCreationHandler import DerivedFrequencyDisplayHandler
 
 import datetime as dt
 
@@ -96,6 +97,21 @@ def createDerivedVdi():
         return jsonify(resp), resp['status']
     # in case of get request just return the html template
     return render_template('createDerivedVdi.html.j2')
+
+@app.route('/displayDerivedFrequency', methods=['GET', 'POST'])
+def displayDerivedFrequency():
+    # in case of post request, create raw voltage and return json response
+    if request.method == 'POST':
+        startDate= request.form.get('startDate')
+        endDate= request.form.get('endDate')
+        obj_derivedFreqDisplayHandler = DerivedFrequencyDisplayHandler(configDict['derivedFrequencyDisplayServiceUrl'])
+        startDate = dt.datetime.strptime(startDate, '%Y-%m-%d')
+        endDate = dt.datetime.strptime(endDate, '%Y-%m-%d')
+        resp = obj_derivedFreqDisplayHandler.displayDerivedFrequency(startDate, endDate)
+        # print(resp)
+        return render_template('displayDerivedFrequency.html.j2',resp=resp, method=request.method)
+    # in case of get request just return the html template
+    return render_template('displayDerivedFrequency.html.j2', method=request.method)
 
 
 if __name__ == '__main__':
